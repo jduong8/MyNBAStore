@@ -25,4 +25,28 @@ enum ProductType: Decodable {
     case pants
     case hoodie
     case short
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        switch try container.decode(String.self) {
+        case "tshirt": self = .tshirt
+        case "hat": self = .hat
+        case "pants": self = .pants
+        case "hoodie": self = .hoodie
+        case "short": self = .short
+        default: fatalError()
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .tshirt: try container.encode("tshirt")
+        case .hat: try container.encode("hat")
+        case .pants: try container.encode("pants")
+        case .hoodie: try container.encode("hoodie")
+        case .short: try container.encode("short")
+        default: fatalError()
+        }
+    }
 }
