@@ -13,10 +13,10 @@ struct PurchaseView: View {
     var purchase: Purchase
     
     var total: Double {
-        cartManager.purchases.map({$0.product.price}).reduce(0, +)
+        cartManager.purchases.map({ $0.product.price }).reduce(0, +)
     }
     var totalQuantity: Int {
-        cartManager.purchases.map({$0.quantity}).reduce(0, +)
+        cartManager.purchases.map({ $0.quantity }).reduce(0, +)
     }
     
     var body: some View {
@@ -25,7 +25,7 @@ struct PurchaseView: View {
                 LazyVStack {
                     ForEach(cartManager.purchases) {
                         PurchaseCellView(purchase: $0)
-                    }
+                    }.onDelete(perform: self.delete)
                 }
             }
             Spacer()
@@ -50,6 +50,9 @@ struct PurchaseView: View {
                 }
             }
         }
+    }
+    private func delete(at offsets: IndexSet) {
+        self.cartManager.purchases.remove(atOffsets: offsets)
     }
 }
 

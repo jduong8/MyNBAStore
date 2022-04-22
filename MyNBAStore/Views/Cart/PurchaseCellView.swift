@@ -10,15 +10,18 @@ import SwiftUI
 struct PurchaseCellView: View {
     
     @State var purchase: Purchase
+    var totalPrice: Double {
+        purchase.product.price * Double(purchase.quantity)
+    }
     
     var body: some View {
         HStack {
             Image(purchase.product.imageName)
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 100, height: 115)
                 .aspectRatio(contentMode: .fit)
-                .padding(.bottom)
-            VStack {
+//                .padding(.bottom)
+            VStack (alignment: .leading){
                 Text(purchase.product.name)
                     .foregroundColor(.black)
                     .fontWeight(.bold)
@@ -29,7 +32,7 @@ struct PurchaseCellView: View {
                     .foregroundColor(.black)
                     .opacity(0.3)
                 QuantitySelectorView(quantity: $purchase.quantity)
-                Text("\(purchase.product.price, specifier: "%.2f") €")
+                Text("\(totalPrice, specifier: "%.2f") €")
                     .foregroundColor(.black)
             }
         }

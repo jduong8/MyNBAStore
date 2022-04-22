@@ -20,11 +20,15 @@ struct ProductDetailView: View {
                 Image(product.imageName)
                     .resizable()
                     .scaledToFit()
+                    .frame(maxWidth: .infinity, alignment: .center)
                 Text(product.name)
                     .foregroundColor(.black)
                     .fontWeight(.heavy)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 Text(product.description)
                     .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .lineLimit(nil)
             }
             .padding()
             
