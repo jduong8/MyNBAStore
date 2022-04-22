@@ -13,7 +13,7 @@ struct ProductListView: View {
     @ObservedObject var readProductsData = ReadProductsData()
 
     private static let spacing: CGFloat = 15
-    private let columns: [GridItem] = (0...2).map { _ in
+    private let columns: [GridItem] = (0..<2).map { _ in
         GridItem(.flexible(), spacing: spacing, alignment: .top)
     }
 
