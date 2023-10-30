@@ -10,8 +10,8 @@ import SwiftUI
 struct PurchaseCellView: View {
     
     @State var purchase: Purchase
-    var totalPrice: Double {
-        purchase.product.price * Double(purchase.quantity)
+    var totalPrice: String {
+        self.getPrice(value: purchase.product.price * Double(purchase.quantity))
     }
     
     var body: some View {
@@ -20,8 +20,7 @@ struct PurchaseCellView: View {
                 .resizable()
                 .frame(width: 100, height: 115)
                 .aspectRatio(contentMode: .fit)
-//                .padding(.bottom)
-            VStack (alignment: .leading){
+            VStack(alignment: .leading) {
                 Text(purchase.product.name)
                     .foregroundColor(.black)
                     .fontWeight(.bold)
@@ -32,10 +31,17 @@ struct PurchaseCellView: View {
                     .foregroundColor(.black)
                     .opacity(0.3)
                 QuantitySelectorView(quantity: $purchase.quantity)
-                Text("\(totalPrice, specifier: "%.2f") €")
+                Text("\(totalPrice)")
                     .foregroundColor(.black)
             }
         }
+    }
+    func getPrice(value: Double) -> String {
+        let format = NumberFormatter()
+        format.numberStyle = .currency
+        format.locale = .init(identifier: "eu_FR_POSIX")
+        
+        return format.string(from: NSNumber(value: value)) ?? ""
     }
 }
 

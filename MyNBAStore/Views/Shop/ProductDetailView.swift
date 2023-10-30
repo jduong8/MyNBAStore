@@ -42,7 +42,7 @@ struct ProductDetailView: View {
             .padding()
             
             Button (action: {
-                cartManager.addPurchase(purchase: Purchase(quantity: 1, product: product, size: selectedSize))
+                cartManager.addPurchase(purchase: Purchase(product: product, size: selectedSize))
             }) {
                 Text("Acheter en taille \(selectedSize.rawValue.uppercased()) : \(product.price, specifier: "%.2f") €")
                     .font(.title2)
